@@ -1,39 +1,41 @@
 version: "3.9"
 services:
-  flask-uwsgi:
-    build: 
-      context: flask-uwsgi
-      dockerfile: Dockerfile
-    # image: jbcontainertst.azurecr.io/compose/flask-uwsgi
   mongo:
     image: mongo
   app1:
     build: 
       context: app1
       dockerfile: Dockerfile
-    # image: jbcontainertst.azurecr.io/compose/app1
-    depends_on:
-      - flask-uwsgi
-    volumes:
-      - static-content:/var/www/app1-static
+    image: jbcontainertst.azurecr.io/test/app1
+    deploy:
+      resources:
+        limits:
+          cpus: '0.01'
+          memory: 100M
+    # volumes:
+    #   - static-content:/var/www/app1-static
   app2:
     build:
       context: app2
       dockerfile: Dockerfile
-    # image: jbcontainertst.azurecr.io/compose/app2
-    depends_on:
-      - flask-uwsgi
-    volumes:
-      - static-content:/var/www/app2-static
+    image: jbcontainertst.azurecr.io/test/app2
+    deploy:
+      resources:
+        limits:
+          cpus: '0.01'
+          memory: 100M
+    #volumes:
+      # - static-content:/var/www/app2-static
   ngninx:
     build: 
       context: nginx
       dockerfile: Dockerfile
-    # image: jbcontainertst.azurecr.io/compose/nginx
+    image: jbcontainertst.azurecr.io/test/nginx
+    domainname: "myapp"
     ports:
       - 80:80
     depends_on:
       - app2
       - app1
-volumes:
-  static-content:
+# volumes:
+#   static-content:

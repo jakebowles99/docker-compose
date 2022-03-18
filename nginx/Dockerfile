@@ -7,4 +7,4 @@ MAINTAINER Levi Bracken <levi.bracken@gmail.com>
 # Install custom nginx config
 COPY nginx.conf /etc/nginx/
 COPY docker-example.nginx.conf /etc/nginx/conf.d/
-# RUN rm /etc/nginx/conf.d/default.conf
+RUN rm /etc/nginx/conf.d/default.conf

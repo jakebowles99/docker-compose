@@ -1,7 +1,7 @@
 # Builds a Docker image to run docker-example-app1.  The base image will handle
 # adding any application files and required dependencies to this image.
 #
-FROM lbracken/flask-uwsgi
+FROM flask-uwsgi
 MAINTAINER Levi Bracken <levi.bracken@gmail.com>
 
 # Create a symlink with a unique name to the Flask app's static resources.
@@ -15,4 +15,4 @@ EXPOSE 5000
 # If running this app behind a webserver using the uwsgi protocol (like nginx),
 # then use --socket.  Otherwise run with --http to run as a full http server.
 #CMD ["uwsgi", "--http", ":5000",         "--wsgi-file", "app.py", "--callable", "app", "--processes",  "2", "--threads", "4"]
-CMD ["uwsgi", "--socket", "0.0.0.0:5000", "--wsgi-file", "app.py", "--callable", "app", "--processes",  "2", "--threads", "4"]
+CMD ["uwsgi", "--socket", "0.0.0.0:5001", "--wsgi-file", "app.py", "--callable", "app", "--processes",  "2", "--threads", "4"]
