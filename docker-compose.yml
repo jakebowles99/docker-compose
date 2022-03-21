@@ -12,8 +12,8 @@ services:
         limits:
           cpus: '0.01'
           memory: 100M
-    # volumes:
-    #   - static-content:/var/www/app1-static
+    volumes:
+      - static-content:/var/www/app1-static
   app2:
     build:
       context: app2
@@ -37,5 +37,9 @@ services:
     depends_on:
       - app2
       - app1
-# volumes:
-#   static-content:
+volumes:
+  static-content:
+    driver: azure_file
+    driver_opts:
+      share_name: cicd
+      storage_account_name: jbcicd
